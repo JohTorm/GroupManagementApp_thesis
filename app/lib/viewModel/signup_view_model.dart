@@ -7,19 +7,19 @@ import 'package:rxdart/rxdart.dart';
 import '../mvvm/app_routes.dart';
 
 
-class LoginViewState {
+class SignupViewState {
   final String username;
   final String password;
   final int count;
-  LoginViewState({this.username = 'jee', this.password = 'jee', this.count = 0});
+  SignupViewState({this.username = 'jee', this.password = 'jee', this.count = 0});
 
-  LoginViewState copyWith({
+  SignupViewState copyWith({
     String? username,
     String? password,
     int? count,
 
   }) {
-    return LoginViewState(
+    return SignupViewState(
       username: username ?? this.username,
       password: password ?? this.password,
       count: count ?? this.count,
@@ -30,31 +30,19 @@ class LoginViewState {
 }
 
 
-class LoginScreenViewModel extends ViewModel {
-  final _stateSubject = BehaviorSubject<LoginViewState>.seeded(LoginViewState());
-  Stream<LoginViewState> get state => _stateSubject;
+class SignupScreenViewModel extends ViewModel {
+  final _stateSubject = BehaviorSubject<SignupViewState>.seeded(SignupViewState());
+  Stream<SignupViewState> get state => _stateSubject;
 
   final _routesSubject = PublishSubject<AppRouteSpec>();
   Stream<AppRouteSpec> get routes => _routesSubject;
 
-  void login(String username, String password) {
-    _routesSubject.add(
-      AppRouteSpec(
-        name: '/second',
-        arguments: {
-
-        },
-      ),
-    );
-  }
-
   void signup() {
     _routesSubject.add(
       AppRouteSpec(
-        name: '/signup',
+        name: '/',
       ),
     );
-    print('testi11 ');
   }
 
   void secondPageButtonTapped(String username) {

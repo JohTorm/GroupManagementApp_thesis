@@ -15,6 +15,7 @@ _SecondPageState createState() => _SecondPageState(viewModel);
 
 class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
   _SecondPageState(SecondPageViewModel viewModel) : super(viewModel);
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
   Widget build(BuildContext context) {
     return StreamBuilder<SecondPageState>(
       stream: viewModel.state,
+
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Container();
 
@@ -35,24 +37,41 @@ class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
           appBar: AppBar(
             title: const Text('Second Page'),
           ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '''Hello ${state.user} ''',
-                      textAlign: TextAlign.center,
+            body: ListView.builder(
+              itemBuilder: (BuildContext, index){
+                return Card(
+                  child: ListTile(
+                    title: Text(state.user),
+                    subtitle: Text("${state.user} sukunimi"),
+                    selected: index == _selectedIndex,
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                      viewModel.displayDialog(BuildContext);
+                    },
+                    trailing: Wrap(
+                      spacing: 12, // space between two icons
+                      children: <Widget>[
+                        IconButton(icon: Icon(Icons.add),
+                            onPressed: () {
+                          //
+                      } ), // icon-1
+                        IconButton(icon: Icon(Icons.delete),
+                            onPressed: () {
+                              //
+                            } ), // icon-2
+                      ],
                     ),
-                    const SizedBox(height: 32),
+                  ),
+                );
+              },
+              itemCount: 5,
+              shrinkWrap: true,
+              padding: EdgeInsets.all(5),
+              scrollDirection: Axis.vertical,
 
-                  ],
-                ),
-              ),
-            ),
-          ),
+            )
         );
       },
     );

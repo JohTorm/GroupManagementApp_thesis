@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:app/viewModel/login_view_model.dart';
+import 'package:app/viewModel/signup_view_model.dart';
 
 import '../mvvm/view.abs.dart';
 
-class LoginScreen extends View<LoginScreenViewModel> {
-  LoginScreen({Key? key, required LoginScreenViewModel viewModel}) : super.model(LoginScreenViewModel(), key: key);
+class SignupScreen extends View<SignupScreenViewModel> {
+  SignupScreen({Key? key, required SignupScreenViewModel viewModel}) : super.model(SignupScreenViewModel(), key: key);
 
   static const String _title = 'Sample App';
   @override
@@ -15,10 +15,11 @@ class LoginScreen extends View<LoginScreenViewModel> {
 
 
 
-class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
-  _LoginScreenState(LoginScreenViewModel viewModel) : super(viewModel);
+class _LoginScreenState extends ViewState<SignupScreen, SignupScreenViewModel> {
+  _LoginScreenState(SignupScreenViewModel viewModel) : super(viewModel);
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<LoginViewState>(
+    return StreamBuilder<SignupViewState>(
         stream: viewModel.state,
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Container();
@@ -37,8 +38,8 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
 
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Login Page'),
-                automaticallyImplyLeading: false,
+                title: const Text('Signup Page'),
+
               ),
               body: Center(
 
@@ -58,9 +59,21 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(10),
                         child: const Text(
-                          'Sign in',
+                          'Sign up',
                           style: TextStyle(fontSize: 20),
                         )),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: TextField(
+                        obscureText: true,
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'email',
+                        ),
+                      ),
+                    ),
+
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: TextField(
@@ -82,39 +95,18 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        //forgot password screen
-                      },
-                      child: const Text('Forgot Password',),
-                    ),
+
                     Container(
                         height: 50,
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                         child: ElevatedButton(
-                          child: const Text('Login'),
-                          onPressed: () {
-                            print(nameController.text);
-                            print(passwordController.text);
-                            viewModel.secondPageButtonTapped(nameController.text);
-                          },
-                        )
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('New user?'),
-                        TextButton(
-                          child: const Text(
-                            'Sign up',
-                            style: TextStyle(fontSize: 20),
-                          ),
+                          child: const Text('Sign up'),
                           onPressed: () {
                             viewModel.signup();
                           },
                         )
-                      ],
                     ),
+
                   ],
                 )
               )

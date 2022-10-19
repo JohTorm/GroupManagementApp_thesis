@@ -1,8 +1,8 @@
 import 'package:app/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:app/screens/movie_screen.dart';
+
 import 'package:app/screens/login_screen.dart';
-import 'package:app/viewModel/movies_list_view_model.dart';
+
 import 'package:provider/provider.dart';
 
 import 'mvvm/view.abs.dart';

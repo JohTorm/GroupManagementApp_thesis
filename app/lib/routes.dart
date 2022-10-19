@@ -1,9 +1,11 @@
 import 'package:app/screens/login_screen.dart';
-import 'package:app/screens/movie_screen.dart';
+
 import 'package:app/screens/second.dart';
-import 'package:app/viewModel/movies_list_view_model.dart';
+import 'package:app/screens/signup_screen.dart';
+
 import 'package:app/viewModel/login_view_model.dart';
 import 'package:app/viewModel/second_view_model.dart';
+import 'package:app/viewModel/signup_view_model.dart';
 
 import 'package:flutter/material.dart';
 
@@ -32,6 +34,11 @@ class AppRouter {
           builder: (_) => SecondPage(
             viewModel: SecondPageViewModel(user: user),
           ),
+        );
+      case '/signup':
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => SignupScreen(viewModel: SignupScreenViewModel()),
         );
 
 
