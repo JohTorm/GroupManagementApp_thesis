@@ -5,18 +5,18 @@ import 'package:provider/provider.dart';
 import '../mvvm/view.abs.dart';
 import '../ui_components.dart';
 import '../viewModel/event_list_view_model.dart';
-import '../viewModel/second_view_model.dart';
+import '../viewModel/group_events_view_model.dart';
 
-class SecondPage extends View<SecondPageViewModel> {
-const SecondPage({required SecondPageViewModel viewModel, Key? key})
+class GroupPage extends View<GroupPageViewModel> {
+const GroupPage({required GroupPageViewModel viewModel, Key? key})
 : super.model(viewModel, key: key);
 
 @override
-_SecondPageState createState() => _SecondPageState(viewModel);
+_GroupPageState createState() => _GroupPageState(viewModel);
 }
 
-class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
-  _SecondPageState(SecondPageViewModel viewModel) : super(viewModel);
+class _GroupPageState extends ViewState<GroupPage, GroupPageViewModel> {
+  _GroupPageState(GroupPageViewModel viewModel) : super(viewModel);
   int _selectedIndex = 0;
 
   @override
@@ -29,7 +29,7 @@ class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
   Widget build(BuildContext context) {
 
 
-    return StreamBuilder<SecondPageState>(
+    return StreamBuilder<GroupPageState>(
       stream: viewModel.state,
 
       builder: (context, snapshot) {
@@ -39,7 +39,7 @@ class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Second Page'),
+            title: const Text('GroupPage'),
             actions: [
 
               PopupMenuButton(
@@ -89,8 +89,8 @@ class _SecondPageState extends ViewState<SecondPage, SecondPageViewModel> {
               itemBuilder: (BuildContext, index){
                 return Card(
                   child: ListTile(
-                    title: Text(state.user),
-                    subtitle: Text("${state.user} sukunimi"),
+                    title: Text(state.group),
+                    subtitle: Text("${state.group} sukunimi"),
                     selected: index == _selectedIndex,
                     onTap: () {
                       setState(() {

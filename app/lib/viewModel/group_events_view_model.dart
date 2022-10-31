@@ -12,36 +12,36 @@ import 'package:app/viewModel/event_view_model.dart';
 
 import 'event_list_view_model.dart';
 
-class SecondPageState {
-  final String user;
+class GroupPageState {
+  final String group;
 
 
-  SecondPageState({
-    this.user = '',
+  GroupPageState({
+    this.group = '',
 
   });
 
-  SecondPageState copyWith({
-    String? user,
+  GroupPageState copyWith({
+    String? group,
 
   }) {
-    return SecondPageState(
-      user: user ?? this.user,
+    return GroupPageState(
+      group: group ?? this.group,
 
     );
   }
 }
 
-class SecondPageViewModel extends ViewModel {
+class GroupPageViewModel extends ViewModel {
   final _stateSubject =
-  BehaviorSubject<SecondPageState>.seeded(SecondPageState());
-  Stream<SecondPageState> get state => _stateSubject;
+  BehaviorSubject<GroupPageState>.seeded(GroupPageState());
+  Stream<GroupPageState> get state => _stateSubject;
 
   final _routesSubject = PublishSubject<AppRouteSpec>();
   Stream<AppRouteSpec> get routes => _routesSubject;
 
-  SecondPageViewModel({required String user}) {
-    _stateSubject.add(SecondPageState(user: user));
+  GroupPageViewModel({required String group}) {
+    _stateSubject.add(GroupPageState(group: group));
   }
 
   void showMemberMenu(context) async {
@@ -76,12 +76,12 @@ class SecondPageViewModel extends ViewModel {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(_stateSubject.value.user),
+          title: Text(_stateSubject.value.group),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('This is a demo alert dialog.'),
-                Text('${_stateSubject.value.user} Sukunimi'),
+                Text('${_stateSubject.value.group} Sukunimi'),
                 Row(
                   children: <Widget>[
                     Icon(Icons.map),
