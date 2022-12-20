@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app/viewModel/login_view_model.dart';
 
-import '../mvvm/view.abs.dart';
+import '../model/view.abs.dart';
 
 class LoginScreen extends View<LoginScreenViewModel> {
   LoginScreen({Key? key, required LoginScreenViewModel viewModel}) : super.model(LoginScreenViewModel(), key: key);
@@ -12,8 +12,6 @@ class LoginScreen extends View<LoginScreenViewModel> {
   _LoginScreenState createState() => _LoginScreenState(viewModel);
 
 }
-
-
 
 class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
   _LoginScreenState(LoginScreenViewModel viewModel) : super(viewModel);
@@ -67,7 +65,7 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
                         controller: nameController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Username',
+                          labelText: 'Email',
                         ),
                       ),
                     ),
@@ -94,9 +92,8 @@ class _LoginScreenState extends ViewState<LoginScreen, LoginScreenViewModel> {
                         child: ElevatedButton(
                           child: const Text('Login'),
                           onPressed: () {
-                            print(nameController.text);
-                            print(passwordController.text);
-                            viewModel.secondPageButtonTapped(nameController.text);
+
+                            viewModel.login(context,nameController.text,passwordController.text);
                           },
                         )
                     ),

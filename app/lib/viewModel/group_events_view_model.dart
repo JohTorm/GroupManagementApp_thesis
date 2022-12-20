@@ -1,47 +1,41 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:rxdart/subjects.dart';
 
-import '../mvvm/app_routes.dart';
-import '../mvvm/view_model.abs.dart';
-import 'package:app/mvvm/event_list.dart';
+import '../model/app_routes.dart';
+import '../model/view_model.abs.dart';
 
 
-import 'package:app/viewModel/event_view_model.dart';
-
-import 'event_list_view_model.dart';
-
-class GroupPageState {
+class GroupEventPageState {
   final String group;
 
 
-  GroupPageState({
+  GroupEventPageState({
     this.group = '',
 
   });
 
-  GroupPageState copyWith({
+  GroupEventPageState copyWith({
     String? group,
 
   }) {
-    return GroupPageState(
+    return GroupEventPageState(
       group: group ?? this.group,
 
     );
   }
 }
 
-class GroupPageViewModel extends ViewModel {
+class GroupEventPageViewModel extends ViewModel {
   final _stateSubject =
-  BehaviorSubject<GroupPageState>.seeded(GroupPageState());
-  Stream<GroupPageState> get state => _stateSubject;
+  BehaviorSubject<GroupEventPageState>.seeded(GroupEventPageState());
+  Stream<GroupEventPageState> get state => _stateSubject;
 
   final _routesSubject = PublishSubject<AppRouteSpec>();
   Stream<AppRouteSpec> get routes => _routesSubject;
 
-  GroupPageViewModel({required String group}) {
-    _stateSubject.add(GroupPageState(group: group));
+  GroupEventPageViewModel({required String group}) {
+    _stateSubject.add(GroupEventPageState(group: group));
   }
 
   void showMemberMenu(context) async {
@@ -117,7 +111,7 @@ class GroupPageViewModel extends ViewModel {
         name: '/createGroup',
       ),
     );
-    print('testi11 ');
+
   }
 
   @override

@@ -5,7 +5,7 @@ import 'package:app/screens/login_screen.dart';
 
 import 'package:provider/provider.dart';
 
-import 'mvvm/view.abs.dart';
+import 'model/view.abs.dart';
 void main() => runApp(App());
 class App extends StatelessWidget {
   final _router = AppRouter();

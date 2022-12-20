@@ -1,22 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../mvvm/view.abs.dart';
-import '../ui_components.dart';
-import '../viewModel/event_list_view_model.dart';
+import '../model/view.abs.dart';
 import '../viewModel/group_events_view_model.dart';
 
-class GroupPage extends View<GroupPageViewModel> {
-const GroupPage({required GroupPageViewModel viewModel, Key? key})
+class GroupEventPage extends View<GroupEventPageViewModel> {
+const GroupEventPage({required GroupEventPageViewModel viewModel, Key? key})
 : super.model(viewModel, key: key);
 
 @override
-_GroupPageState createState() => _GroupPageState(viewModel);
+_GroupEventPageState createState() => _GroupEventPageState(viewModel);
 }
 
-class _GroupPageState extends ViewState<GroupPage, GroupPageViewModel> {
-  _GroupPageState(GroupPageViewModel viewModel) : super(viewModel);
+class _GroupEventPageState extends ViewState<GroupEventPage, GroupEventPageViewModel> {
+  _GroupEventPageState(GroupEventPageViewModel viewModel) : super(viewModel);
   int _selectedIndex = 0;
 
   @override
@@ -29,7 +26,7 @@ class _GroupPageState extends ViewState<GroupPage, GroupPageViewModel> {
   Widget build(BuildContext context) {
 
 
-    return StreamBuilder<GroupPageState>(
+    return StreamBuilder<GroupEventPageState>(
       stream: viewModel.state,
 
       builder: (context, snapshot) {
@@ -39,7 +36,7 @@ class _GroupPageState extends ViewState<GroupPage, GroupPageViewModel> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('GroupPage'),
+            title: const Text('GroupEventPage'),
             actions: [
 
               PopupMenuButton(

@@ -9,7 +9,7 @@ class EventListViewModel extends ChangeNotifier {
   Future<void> fetchMovies(String keyword) async {
     final results =  await Webservice().fetchMovies(keyword);
     this.events = results.map((item) => EventViewModel(event: item)).toList();
-    print(this.events);
+
     notifyListeners();
   }
 

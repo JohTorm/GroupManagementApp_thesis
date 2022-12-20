@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:app/viewModel/signup_view_model.dart';
 
-import '../mvvm/view.abs.dart';
+import '../model/view.abs.dart';
+import '../model/user.dart';
+import '../services/webservice.dart';
 
 class SignupScreen extends View<SignupScreenViewModel> {
   SignupScreen({Key? key, required SignupScreenViewModel viewModel}) : super.model(SignupScreenViewModel(), key: key);
@@ -65,7 +70,7 @@ class _LoginScreenState extends ViewState<SignupScreen, SignupScreenViewModel> {
                     Container(
                       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                       child: TextField(
-                        obscureText: true,
+                        obscureText: false,
                         controller: emailController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -102,8 +107,23 @@ class _LoginScreenState extends ViewState<SignupScreen, SignupScreenViewModel> {
                         child: ElevatedButton(
                           child: const Text('Sign up'),
                           onPressed: () {
-                            viewModel.signup();
-                          },
+                            final bool _isValid = EmailValidator.validate(
+                                emailController.text);
+                            if (_isValid) {
+                              viewModel.signup(context, emailController.text,
+                                  nameController.text, passwordController.text);
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Invalid email",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              );
+                            }
+                          }
                         )
                     ),
 

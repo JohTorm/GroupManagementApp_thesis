@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-
-import '../mvvm/view.abs.dart';
+import '../model/view.abs.dart';
 import '../viewModel/create_group_view_model.dart';
 
 class CreateGroup extends View<CreateGroupViewModel> {
-  CreateGroup({Key? key, required CreateGroupViewModel viewModel}) : super.model(CreateGroupViewModel(), key: key);
+  CreateGroup({Key? key, required CreateGroupViewModel viewModel}) : super.model(viewModel, key: key);
 
   static const String _title = 'Sample App';
   @override
@@ -72,17 +70,6 @@ class _CreateGroupState extends ViewState<CreateGroup, CreateGroupViewModel> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: TextField(
-                        obscureText: true,
-                        controller: passwordController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                        ),
-                      ),
-                    ),
 
                     Container(
                         height: 50,
@@ -90,9 +77,7 @@ class _CreateGroupState extends ViewState<CreateGroup, CreateGroupViewModel> {
                         child: ElevatedButton(
                           child: const Text('Create group'),
                           onPressed: () {
-                            print(nameController.text);
-                            print(passwordController.text);
-                            viewModel.createGroup(nameController.text);
+                            viewModel.createGroup(context,nameController.text);
                           },
                         )
                     ),
